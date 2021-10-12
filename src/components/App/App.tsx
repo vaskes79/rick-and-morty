@@ -22,9 +22,11 @@ export function App() {
   }
 
   if (error || !data) {
-    return <Container>
-      <h2>error...</h2>
-    </Container>;
+    return (
+      <Container>
+        <h2>error...</h2>
+      </Container>
+    );
   }
 
   return (
