@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTES } from "../../gql";
 import { CharacterItem, ICharacterItem } from "../CharacterItem";
+import { Search } from "../Search";
 import { Container } from "./AppStyles";
 
 interface GetCharcterRes {
@@ -22,7 +23,9 @@ export function App() {
 
   return (
     <Container>
-      <header>search</header>
+      <header>
+        <Search />
+      </header>
       <main>
         {data.characters.results.map((item) => (
           <CharacterItem key={item.id} {...item} />
