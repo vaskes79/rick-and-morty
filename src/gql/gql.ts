@@ -11,3 +11,15 @@ export const GET_CHARACTES = gql`
     }
   }
 `;
+
+export const GET_CHARACTES_BY_FILTER_NAME = gql`
+  query Characters($name: String) {
+    characters(filter: { name: $name }) {
+      results {
+        name
+        image
+        id
+      }
+    }
+  }
+`;

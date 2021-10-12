@@ -4,7 +4,7 @@ import { CharacterItem, ICharacterItem } from "../CharacterItem";
 import { Search } from "../Search";
 import { Container, Member } from "./AppStyles";
 
-interface GetCharcterRes {
+export interface GetCharcterRes {
   characters: {
     results: ICharacterItem[];
   };
