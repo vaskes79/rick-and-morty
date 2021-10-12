@@ -1,9 +1,11 @@
 import { Action, AppState, TypeAppAction } from "./types";
+import differenceBy from "lodash/differenceBy";
 
 export const InitState: AppState = {
   loading: false,
   error: undefined,
   characters: [],
+  removedCharacters: [],
   rick: undefined,
   morty: undefined,
 };
@@ -18,14 +20,24 @@ export const reducer = (state: AppState, action: Action) => {
       return { ...state, loading };
 
     case TypeAppAction.updateCharacters:
-      return { ...state, characters: action.characters };
+      const diff = differenceBy(
+        action.characters,
+        state.removedCharacters,
+        "id"
+      );
+      return { ...state, characters: diff };
 
     case TypeAppAction.deleteCharacter:
       const { id } = action;
+      const removeCharacter = state.characters.filter(
+        (character) => character.id === id
+      );
       const characters = state.characters.filter(
         (character) => character.id !== id
       );
-      return { ...state, characters };
+
+      let removedCharacters = [...state.removedCharacters, ...removeCharacter];
+      return { ...state, characters, removedCharacters };
 
     case TypeAppAction.error:
       return { ...state, error: action.error };

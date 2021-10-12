@@ -10,6 +10,7 @@ export interface AppState {
   loading: boolean;
   error: ApolloError | undefined;
   characters: Character[];
+  removedCharacters: Character[];
   rick: Character | undefined;
   morty: Character | undefined;
 }
