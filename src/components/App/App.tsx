@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CHARACTES } from "../../gql";
 import { CharacterItem, ICharacterItem } from "../CharacterItem";
 import { Search } from "../Search";
-import { Container } from "./AppStyles";
+import { Container, Member } from "./AppStyles";
 
 interface GetCharcterRes {
   characters: {
@@ -14,11 +14,17 @@ export function App() {
   const { loading, error, data } = useQuery<GetCharcterRes>(GET_CHARACTES);
 
   if (loading) {
-    return <h3>loading...</h3>;
+    return (
+      <Container>
+        <h2>loading...</h2>
+      </Container>
+    );
   }
 
   if (error || !data) {
-    return <h3>Error</h3>;
+    return <Container>
+      <h2>error...</h2>
+    </Container>;
   }
 
   return (
@@ -31,7 +37,17 @@ export function App() {
           <CharacterItem key={item.id} {...item} />
         ))}
       </main>
-      <footer>main</footer>
+      <footer>
+        <h2>Party</h2>
+        <div className="member-wrap">
+          <Member>
+            <span className="name">Rick</span>
+          </Member>
+          <Member>
+            <span className="name">Morty</span>
+          </Member>
+        </div>
+      </footer>
     </Container>
   );
 }
