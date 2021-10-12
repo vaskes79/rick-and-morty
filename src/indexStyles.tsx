@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, css } from "styled-components/macro";
+import { createGlobalStyle, css } from "styled-components/macro";
 
 const globalCss = css`
   @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap");
@@ -22,12 +22,4 @@ const globalCss = css`
 
 export const GlobalStyle = createGlobalStyle`
   ${globalCss}
-`;
-
-export const Container = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  min-height: 100vh;
 `;

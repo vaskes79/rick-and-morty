@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import { App } from "./components/App";
-import { Container, GlobalStyle } from "./indexStyles";
+import { GlobalStyle } from "./indexStyles";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -11,9 +11,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <GlobalStyle />
-    <Container>
-      <App />
-    </Container>
+    <App />
   </ApolloProvider>,
   document.getElementById("root")
 );

@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTES } from "../../gql";
 import { CharacterItem, ICharacterItem } from "../CharacterItem";
+import { Container } from "./AppStyles";
 
 interface GetCharcterRes {
   characters: {
@@ -20,7 +21,7 @@ export function App() {
   }
 
   return (
-    <>
+    <Container>
       <header>search</header>
       <main>
         {data.characters.results.map((item) => (
@@ -28,6 +29,6 @@ export function App() {
         ))}
       </main>
       <footer>main</footer>
-    </>
+    </Container>
   );
 }
