@@ -1,6 +1,7 @@
 import { ListCharacters } from "../ListCharacters";
+import { PatyRoom } from "../PatyRoom";
 import { Search } from "../Search";
-import { Container, Member } from "./AppStyles";
+import { Container } from "./AppStyles";
 
 export function App() {
   return (
@@ -12,15 +13,7 @@ export function App() {
         <ListCharacters />
       </main>
       <footer>
-        <h2>Party</h2>
-        <div className="member-wrap">
-          <Member>
-            <span className="name">Rick</span>
-          </Member>
-          <Member>
-            <span className="name">Morty</span>
-          </Member>
-        </div>
+        <PatyRoom />
       </footer>
     </Container>
   );

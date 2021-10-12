@@ -4,9 +4,12 @@ export const InitState: AppState = {
   loading: false,
   error: undefined,
   characters: [],
-  rickMemebers: [],
-  mortyMemebers: [],
+  rick: undefined,
+  morty: undefined,
 };
+
+const rickRegex = /rick/gi;
+const mortyRegex = /morty/gi;
 
 export const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
@@ -26,5 +29,19 @@ export const reducer = (state: AppState, action: Action) => {
 
     case TypeAppAction.error:
       return { ...state, error: action.error };
+
+    case TypeAppAction.addMember:
+      const { character } = action;
+      if (rickRegex.test(character.name)) {
+        return { ...state, rick: character };
+      }
+
+      if (mortyRegex.test(character.name)) {
+        return { ...state, morty: character };
+      }
+      return state;
+
+    default:
+      return state;
   }
 };

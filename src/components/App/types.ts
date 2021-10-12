@@ -10,8 +10,8 @@ export interface AppState {
   loading: boolean;
   error: ApolloError | undefined;
   characters: Character[];
-  rickMemebers: Character[];
-  mortyMemebers: Character[];
+  rick: Character | undefined;
+  morty: Character | undefined;
 }
 
 export enum TypeAppAction {
@@ -25,6 +25,11 @@ export enum TypeAppAction {
 export interface LoadingAction {
   type: TypeAppAction.loading;
   loading: boolean;
+}
+
+export interface AddMember {
+  type: TypeAppAction.addMember;
+  character: Character;
 }
 
 export interface DeleteAction {
@@ -46,7 +51,8 @@ export type Action =
   | LoadingAction
   | DeleteAction
   | UpdateCharacters
-  | ErrorAction;
+  | ErrorAction
+  | AddMember;
 
 export interface GetCharcterRes {
   characters: {

@@ -12,7 +12,11 @@ export const CharacterItem: FC<Character> = ({ id, name, image }) => {
 
   const addMemberHandler = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    console.log(name);
+
+    dispatch({
+      type: TypeAppAction.addMember,
+      character: { id, name, image },
+    });
   };
 
   return (
