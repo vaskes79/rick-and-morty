@@ -4,6 +4,14 @@ export interface Character {
   image: string;
 }
 
+export interface AppState {
+  loading: boolean;
+  error: any;
+  characters: Character[];
+  rickMemebers: Character[];
+  mortyMemebers: Character[];
+}
+
 export enum TypeAppAction {
   updateCharacters = "UPDATE_CHARACTERS",
   deleteCharacter = "DELETE_CHARACTER",
@@ -22,11 +30,3 @@ export interface DeleteAction {
 }
 
 export type Action = LoadingAction | DeleteAction;
-
-export interface AppState {
-  loading: boolean;
-  error: any;
-  characters: Character[];
-  rickMemebers: Character[];
-  mortyMemebers: Character[];
-}

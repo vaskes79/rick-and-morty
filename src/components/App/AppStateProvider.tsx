@@ -1,5 +1,4 @@
-import { createContext, Dispatch } from "react";
-import { useReducer, FC } from "react";
+import { useReducer, FC, useContext, createContext, Dispatch } from "react";
 import { AppState, Action } from "./types";
 import { InitState, reducer } from "./reducer";
 
@@ -21,4 +20,26 @@ export const AppStateProvider: FC = ({ children }) => {
       </AppDispatchContext.Provider>
     </AppStateContext.Provider>
   );
+};
+
+export const useAppDispatch = () => {
+  const dispatch = useContext(AppDispatchContext)!;
+
+  if (dispatch === undefined) {
+    throw new Error("useAppDispatch must be used with a AppStateProvider");
+  }
+
+  return (action: Action) => {
+    dispatch(action);
+  };
+};
+
+export const useAppState = () => {
+  const state = useContext(AppStateContext)!;
+
+  if (state === undefined) {
+    throw new Error("useAppState must be used with a AppStateProvider");
+  }
+
+  return state;
 };
