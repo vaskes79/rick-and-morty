@@ -1,12 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTES } from "../../gql";
-import { CharacterItem, ICharacterItem } from "../CharacterItem";
+import { CharacterItem } from "../CharacterItem";
 import { Search } from "../Search";
 import { Container, Member } from "./AppStyles";
+import { Character } from "./types";
 
 export interface GetCharcterRes {
   characters: {
-    results: ICharacterItem[];
+    results: Character[];
   };
 }
 

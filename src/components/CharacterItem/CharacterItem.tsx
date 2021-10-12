@@ -1,13 +1,8 @@
 import { FC } from "react";
+import { Character } from "../App/types";
 import { Container } from "./CharacterItemStyles";
 
-export interface ICharacterItem {
-  id: number | string;
-  name: string;
-  image: string;
-}
-
-export const CharacterItem: FC<ICharacterItem> = ({ id, name, image }) => {
+export const CharacterItem: FC<Character> = ({ id, name, image }) => {
   return (
     <Container href={name}>
       <img className="img" src={image} alt={name} />
