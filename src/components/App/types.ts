@@ -1,3 +1,5 @@
+import { ApolloError } from "@apollo/client";
+
 export interface Character {
   name: string;
   id: number | string;
@@ -6,7 +8,7 @@ export interface Character {
 
 export interface AppState {
   loading: boolean;
-  error: any;
+  error: ApolloError | undefined;
   characters: Character[];
   rickMemebers: Character[];
   mortyMemebers: Character[];
@@ -17,6 +19,7 @@ export enum TypeAppAction {
   deleteCharacter = "DELETE_CHARACTER",
   addMember = "ADD_MEMBER",
   loading = "LOADING",
+  error = "ERROR",
 }
 
 export interface LoadingAction {
@@ -29,4 +32,28 @@ export interface DeleteAction {
   id: string | number;
 }
 
-export type Action = LoadingAction | DeleteAction;
+export interface UpdateCharacters {
+  type: TypeAppAction.updateCharacters;
+  characters: Character[];
+}
+
+export interface ErrorAction {
+  type: TypeAppAction.error;
+  error: ApolloError;
+}
+
+export type Action =
+  | LoadingAction
+  | DeleteAction
+  | UpdateCharacters
+  | ErrorAction;
+
+export interface GetCharcterRes {
+  characters: {
+    results: Character[];
+  };
+}
+
+export interface FilterVars {
+  name: string;
+}

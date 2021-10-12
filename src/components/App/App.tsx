@@ -1,44 +1,15 @@
-import { useQuery } from "@apollo/client";
-import { GET_CHARACTES } from "../../gql";
-import { CharacterItem } from "../CharacterItem";
+import { ListCharacters } from "../ListCharacters";
 import { Search } from "../Search";
 import { Container, Member } from "./AppStyles";
-import { Character } from "./types";
-
-export interface GetCharcterRes {
-  characters: {
-    results: Character[];
-  };
-}
 
 export function App() {
-  const { loading, error, data } = useQuery<GetCharcterRes>(GET_CHARACTES);
-
-  if (loading) {
-    return (
-      <Container>
-        <h2>loading...</h2>
-      </Container>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <Container>
-        <h2>error...</h2>
-      </Container>
-    );
-  }
-
   return (
     <Container>
       <header>
         <Search />
       </header>
       <main>
-        {data.characters.results.map((item) => (
-          <CharacterItem key={item.id} {...item} />
-        ))}
+        <ListCharacters />
       </main>
       <footer>
         <h2>Party</h2>
