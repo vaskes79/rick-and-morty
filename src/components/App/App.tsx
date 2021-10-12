@@ -1,15 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTES } from "../../gql";
-
-interface CharacterItem {
-  id: number | string;
-  name: string;
-  image: string;
-}
+import { CharacterItem, ICharacterItem } from "../CharacterItem";
 
 interface GetCharcterRes {
   characters: {
-    results: CharacterItem[];
+    results: ICharacterItem[];
   };
 }
 
@@ -26,15 +21,12 @@ export function App() {
 
   return (
     <>
-      <header>
-        {data.characters.results.map(({ id, name, image }) => (
-          <a href={name} key={id}>
-            <img src={image} alt={name} />
-            <button data-id={id}>x</button>
-          </a>
+      <header>search</header>
+      <main>
+        {data.characters.results.map((item) => (
+          <CharacterItem key={item.id} {...item} />
         ))}
-      </header>
-      <main>main</main>
+      </main>
       <footer>main</footer>
     </>
   );
