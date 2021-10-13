@@ -35,6 +35,19 @@ describe("The App Reducer", () => {
   });
 
   describe("Actions", () => {
+    const characters = [
+      {
+        id: "1",
+        name: "rick",
+        image: "url1",
+      },
+      {
+        id: "2",
+        name: "morty",
+        image: "url2",
+      },
+    ];
+
     describe("Loading", () => {
       test("loading is true", () => {
         act(() => {
@@ -54,19 +67,6 @@ describe("The App Reducer", () => {
     });
 
     describe("Update characters", () => {
-      const characters = [
-        {
-          id: "1",
-          name: "rick",
-          image: "url1",
-        },
-        {
-          id: "2",
-          name: "morty",
-          image: "url2",
-        },
-      ];
-
       test("check update and delete charactes state", () => {
         act(() => {
           dispatch({ type: TypeAppAction.updateCharacters, characters });
@@ -98,6 +98,26 @@ describe("The App Reducer", () => {
         });
         const [state] = result.current;
         expect(state.error?.message).toEqual("Error message");
+      });
+    });
+
+    describe("Add member to paty room", () => {
+      const [rick, morty] = characters;
+
+      test("add rick to party room", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.addMember, character: rick });
+        });
+        const [state] = result.current;
+        expect(state.rick?.name).toEqual(rick.name);
+      });
+
+      test("add morty to party room", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.addMember, character: morty });
+        });
+        const [state] = result.current;
+        expect(state.morty?.name).toEqual(morty.name);
       });
     });
   });
