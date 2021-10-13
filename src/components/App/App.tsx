@@ -5,7 +5,7 @@ import { Container } from "./AppStyles";
 
 export function App() {
   return (
-    <Container>
+    <Container data-testid="App">
       <header>
         <Search />
       </header>

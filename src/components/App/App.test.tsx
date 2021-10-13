@@ -1,8 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import { AppStateProvider } from "../App";
 import { App } from "./App";
 
-test("renders Rick & Morty Party", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Rick & Morty Party/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App tests", () => {
+  test("renders Rick & Morty Party", () => {
+    render(
+      <AppStateProvider>
+        <App />
+      </AppStateProvider>
+    );
+    const appComp = screen.getByTestId("App");
+    expect(appComp).toBeInTheDocument();
+  });
 });

@@ -20,7 +20,11 @@ export const CharacterItem: FC<Character> = ({ id, name, image }) => {
   };
 
   return (
-    <Container onClick={addMemberHandler} href={name}>
+    <Container
+      data-testid="CharacterItem"
+      onClick={addMemberHandler}
+      href={name}
+    >
       <img className="img" src={image} alt={name} />
       <button className="btn" onClick={deleteHandler}></button>
     </Container>
