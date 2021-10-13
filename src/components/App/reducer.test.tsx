@@ -2,8 +2,9 @@ import { useReducer } from "react";
 import { InitState, reducer } from "./reducer";
 import { renderHook, act } from "@testing-library/react-hooks/pure";
 import { TypeAppAction } from "./types";
+import { ApolloError } from "@apollo/client";
 
-describe("The Base app reducer", () => {
+describe("The App Reducer", () => {
   const { result } = renderHook(() => useReducer(reducer, InitState));
   const [state, dispatch] = result.current;
 
@@ -33,8 +34,8 @@ describe("The Base app reducer", () => {
     });
   });
 
-  describe("Reducer Action tests", () => {
-    describe("Loading state", () => {
+  describe("Actions", () => {
+    describe("Loading", () => {
       test("loading is true", () => {
         act(() => {
           dispatch({ type: TypeAppAction.loading, loading: true });
@@ -52,7 +53,7 @@ describe("The Base app reducer", () => {
       });
     });
 
-    describe("Update characters state", () => {
+    describe("Update characters", () => {
       const characters = [
         {
           id: "1",
@@ -73,7 +74,9 @@ describe("The Base app reducer", () => {
         const [state] = result.current;
         expect(state.characters).toHaveLength(2);
       });
+    });
 
+    describe("Delete character", () => {
       test("check delete character", () => {
         act(() => {
           dispatch({ type: TypeAppAction.deleteCharacter, id: "1" });
@@ -81,6 +84,20 @@ describe("The Base app reducer", () => {
         const [state] = result.current;
         expect(state.characters).toHaveLength(1);
         expect(state.removedCharacters).toHaveLength(1);
+      });
+    });
+
+    describe("Error handling", () => {
+      const error = {
+        message: "Error message",
+      } as ApolloError;
+
+      test("change error message", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.error, error });
+        });
+        const [state] = result.current;
+        expect(state.error?.message).toEqual("Error message");
       });
     });
   });
