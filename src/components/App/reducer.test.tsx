@@ -51,5 +51,37 @@ describe("The Base app reducer", () => {
         expect(state.loading).toBeFalsy();
       });
     });
+
+    describe("Update characters state", () => {
+      const characters = [
+        {
+          id: "1",
+          name: "rick",
+          image: "url1",
+        },
+        {
+          id: "2",
+          name: "morty",
+          image: "url2",
+        },
+      ];
+
+      test("check update and delete charactes state", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.updateCharacters, characters });
+        });
+        const [state] = result.current;
+        expect(state.characters).toHaveLength(2);
+      });
+
+      test("check delete character", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.deleteCharacter, id: "1" });
+        });
+        const [state] = result.current;
+        expect(state.characters).toHaveLength(1);
+        expect(state.removedCharacters).toHaveLength(1);
+      });
+    });
   });
 });
