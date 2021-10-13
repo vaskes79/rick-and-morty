@@ -6,11 +6,15 @@ import { Container } from "./CharacterItemStyles";
 export const CharacterItem: FC<Character> = ({ id, name, image }) => {
   const dispatch = useAppDispatch();
 
-  const deleteHandler = () => {
+  const deleteHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     dispatch({ type: TypeAppAction.deleteCharacter, id });
   };
 
   const addMemberHandler = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.stopPropagation();
     e.preventDefault();
 
     dispatch({
