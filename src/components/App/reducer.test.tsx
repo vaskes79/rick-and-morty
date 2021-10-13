@@ -1,10 +1,11 @@
 import { useReducer } from "react";
 import { InitState, reducer } from "./reducer";
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react-hooks/pure";
+import { TypeAppAction } from "./types";
 
 describe("The Base app reducer", () => {
   const { result } = renderHook(() => useReducer(reducer, InitState));
-  const [state] = result.current;
+  const [state, dispatch] = result.current;
 
   describe("Default state value", () => {
     test("loading is false", () => {
@@ -29,6 +30,26 @@ describe("The Base app reducer", () => {
 
     test("morty is undefined", () => {
       expect(state.morty).toBeUndefined();
+    });
+  });
+
+  describe("Reducer Action tests", () => {
+    describe("Loading state", () => {
+      test("loading is true", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.loading, loading: true });
+        });
+        const [state] = result.current;
+        expect(state.loading).toBeTruthy();
+      });
+
+      test("loading is false", () => {
+        act(() => {
+          dispatch({ type: TypeAppAction.loading, loading: false });
+        });
+        const [state] = result.current;
+        expect(state.loading).toBeFalsy();
+      });
     });
   });
 });
