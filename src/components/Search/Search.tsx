@@ -16,7 +16,7 @@ export const Search: FC = () => {
     GetCharcterRes,
     FilterVars
   >(GET_CHARACTES_BY_FILTER_NAME, {
-    variables: { name: inputText },
+    variables: { name: debounceText },
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
