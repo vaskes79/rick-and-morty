@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { GET_CHARACTES_BY_FILTER_NAME } from "../../gql";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { GET_ALL_EPISODE, GET_CHARACTES_BY_FILTER_NAME } from "../../gql";
 import { useDebounce } from "../../hooks";
 import { useAppDispatch } from "../App";
 import { TypeAppAction } from "../App/types";
@@ -11,6 +11,7 @@ export const Search: FC = () => {
   const [inputText, setInputText] = useState<string>("");
   const dispatch = useAppDispatch();
   const debounceText = useDebounce<string>(inputText);
+  useQuery(GET_ALL_EPISODE);
 
   const [loadGreeting, { loading, error, data }] = useLazyQuery<
     GetCharcterRes,

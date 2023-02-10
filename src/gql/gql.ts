@@ -23,3 +23,19 @@ export const GET_CHARACTES_BY_FILTER_NAME = gql`
     }
   }
 `;
+
+export const GET_ALL_EPISODE = gql`
+  query Episodes {
+    episodes {
+      results {
+        id
+        episode
+        name
+        characters {
+          id
+          name
+        }
+      }
+    }
+  }
+`
